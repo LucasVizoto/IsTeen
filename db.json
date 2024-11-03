@@ -1,0 +1,8 @@
+{
+    "id_game":"1",
+    "name":"Game 1",
+    "description":"This is the first game",
+    "release_date":"2021-01-01",
+    "url_game":"http://localhost:5473",
+    "developer":"Developer 1"
+}
