@@ -1,8 +1,28 @@
 {
-    "id_game":"1",
+    "games":[
+    {
+    "id":"1",
     "name":"Game 1",
     "description":"This is the first game",
     "release_date":"2021-01-01",
-    "url_game":"http://localhost:5473",
+    "url_game":"http://google.com/",
     "developer":"Developer 1"
+    },  
+    {
+    "id":"2",
+    "name":"Game 2",
+    "description":"This is the second game",
+    "release_date":"2021-02-01",
+    "url_game":"http://google.com/",
+    "developer":"Developer 2"
+    },
+    {
+        "id":"3",
+        "name":"Game 3",
+        "description":"This is the third game",
+        "release_date":"2021-03-01",
+        "url_game":"http://google.com/",
+        "developer":"Developer 3"
+    }
+    ]
 }

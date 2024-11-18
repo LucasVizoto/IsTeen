@@ -1,6 +1,7 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import {HomePage} from './pages/Home';
+import { GameList } from './components/GameList';
 
 function App() {
   const router = createBrowserRouter([
@@ -8,8 +9,8 @@ function App() {
       element: <HomePage/>
     },
     {
-      path: '/about',
-      element: ''
+      path: '/view/:id',
+      element: <GameList/>
     }
   ])
 
