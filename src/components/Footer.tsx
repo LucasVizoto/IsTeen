@@ -1,35 +1,24 @@
 
+
 export function FooterPage(){
     return(
         <footer className="bg-gray-900">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
-                <div className="mb-6 md:mb-0">
-                    <a href="https://flowbite.com/" className="flex items-center">
-                        <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 me-3" alt="FlowBite Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Flowbite</span>
-                    </a>
+                <div className="mb-6 md:mb-0 flex items-center">
+                        <img src='src/assets/isteen_icon.png' className="h-8 me-3" alt="FlowBite Logo" />
+                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">ISTEEN</span>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                    <div>
-                        <h2 className="mb-6 text-sm font-semibold uppercase text-white">Resources</h2>
-                        <ul className="text-gray-400 font-medium">
-                            <li className="mb-4">
-                                <a href="https://flowbite.com/" className="hover:underline">Flowbite</a>
-                            </li>
-                            <li>
-                                <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
-                            </li>
-                        </ul>
-                    </div>
+
                     <div>
                         <h2 className="mb-6 text-sm font-semibol uppercase text-white">Follow us</h2>
                         <ul className="text-gray-400 font-medium">
                             <li className="mb-4">
-                                <a href="https://github.com/themesberg/flowbite" className="hover:underline ">Github</a>
+                                <a href="https://github.com/LucasVizoto/isteen" className="hover:underline ">Github</a>
                             </li>
                             <li>
-                                <a href="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</a>
+                                <a href="https://discord.gg/VWjmkFfa/" className="hover:underline">Discord</a>
                             </li>
                         </ul>
                     </div>
@@ -37,7 +26,7 @@ export function FooterPage(){
                         <h2 className="mb-6 text-sm font-semibold uppercase text-white">Legal</h2>
                         <ul className="text-gray-400 font-medium">
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Privacy Policy</a>
+                                <a href="https://storage.googleapis.com/legal-research-converted-documents/modelo_peca/784935103/modelo-politica-de-privacidade.docx?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=calendar-api%40jusbrasil-155317.iam.gserviceaccount.com%2F20241120%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20241120T200317Z&X-Goog-Expires=601&X-Goog-SignedHeaders=host&X-Goog-Signature=687592fa8ff39b844bede5589d06bdf4ffae0e955ed0d4c4443182f90151d97604dc750d587a68b95d573bdcdb5f20746d474ece518b4d509d1de8c6929a080f68b5098a963ce65cbad92f9d0c0d2d0e21d1e086c2c3ce8b9f92da92454a50606bde25249f73d1d12257eedb916c57d7948babfbe0527657c665b1b9eb02980a51ac83c8591a8f712289c79dd64c1ca98e4b425431718b72b2e0a23831870c6e244505123d378c2bb4b0bd4514cfebd8c0ce74ff1757981491468978d116bb6390da6e0f4cbe6038ef7075e966811dfa01602576be26aa24793cf67bcb915c8a9df1dda77e72a7121b034edab26d88da868d0b6920da68ea527af1446a7be5db" className="hover:underline">Privacy Policy</a>
                             </li>
                             <li>
                                 <a href="#" className="hover:underline">Terms &amp; Conditions</a>
@@ -48,7 +37,7 @@ export function FooterPage(){
             </div>
             <hr className="my-6 sm:mx-auto border-gray-700 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
-                <span className="text-sm sm:text-center text-gray-400">© 2023 <a href="https://flowbite.com/" className="hover:underline">Flowbite™</a>. All Rights Reserved.
+                <span className="text-sm sm:text-center text-gray-400">© 2024 <a href="https://flowbite.com/" className="hover:underline">ISTEEN™</a>. All Rights Reserved for the group members.
                 </span>
                 <div className="flex mt-4 sm:justify-center sm:mt-0">
                     <a href="#" className="text-gray-500 hover:text-white">
