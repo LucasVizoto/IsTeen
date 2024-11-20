@@ -6,7 +6,7 @@ export function FooterPage(){
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0 flex items-center">
-                        <img src='src/assets/isteen_icon.png' className="h-8 me-3" alt="FlowBite Logo" />
+                        <img src='src\assets\isteen_icon.png' className="h-8 me-3" />
                         <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">ISTEEN</span>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -37,7 +37,7 @@ export function FooterPage(){
             </div>
             <hr className="my-6 sm:mx-auto border-gray-700 lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
-                <span className="text-sm sm:text-center text-gray-400">© 2024 <a href="https://flowbite.com/" className="hover:underline">ISTEEN™</a>. All Rights Reserved for the group members.
+                <span className="text-sm sm:text-center text-gray-400">© 2024 ISTEEN™. All Rights Reserved for the group members.
                 </span>
                 <div className="flex mt-4 sm:justify-center sm:mt-0">
                     <a href="#" className="text-gray-500 hover:text-white">

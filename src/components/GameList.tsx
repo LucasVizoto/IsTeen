@@ -3,7 +3,7 @@ import { getGames } from "../api/api";
 import { Link } from "react-router-dom";
 
 interface Game{
-    id: number,
+    id: string,
     name: string,
     description: string,
     release_date: string,
