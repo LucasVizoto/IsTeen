@@ -1,28 +1,22 @@
 {
     "games":[
     {
-    "id":"1",
-    "name":"Game 1",
-    "description":"This is the first game",
-    "release_date":"2021-01-01",
-    "url_game":"http://google.com/",
-    "developer":"Developer 1"
+        "id":"1",
+        "name":"Tank",
+        "description":"Combat é um jogo desenvolvido, para o Atari 2600. Foi lançado como um dos nove títulos de lançamento do sistema em setembro de 1977, e foi incluído na caixa com o sistema desde a sua introdução até 1982. O Combat foi baseado em dois jogos de arcade em preto e branco produzidos pela Atari: Tank (publicado sob o nome Kee Games) em 1974 e Anti-Aircraft II em 1975. ",
+        "release_date":"2024-01-01",
+        "url_game":"http://google.com/",
+        "url_image_game": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWsyhI4nt6hIBr9LpkYibLvByoUmPpZtCj_8ZlYtQfK9JU2CROAFHflxEE6AEa8PwMNAlAKu9MgZHo2H5nqzFw8S01mocdhjmxe034MweGKS_1tFhj0a4hMr4Uh6DdTvy_uPOjtYA56y4RkxqPLrHeSRpQda1C5m20B22eODYbp3y4zWN3kqzp3It7/s1550/cz.jpg",
+        "developer":"Camilo Veríssimo Garcia Prado"
     },  
     {
-    "id":"2",
-    "name":"Game 2",
-    "description":"This is the second game",
-    "release_date":"2021-02-01",
-    "url_game":"http://google.com/",
-    "developer":"Developer 2"
-    },
-    {
-        "id":"3",
-        "name":"Game 3",
-        "description":"This is the third game",
-        "release_date":"2021-03-01",
+        "id":"2",
+        "name":"Game 2",
+        "description":"This is the second game",
+        "release_date":"2021-02-01",
         "url_game":"http://google.com/",
-        "developer":"Developer 3"
+        "url_image_game": "",
+        "developer":"Ana"
     }
     ]
 }
