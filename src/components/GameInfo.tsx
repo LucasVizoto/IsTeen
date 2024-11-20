@@ -30,7 +30,7 @@ export function GameInfo(){
     return(
         <div>
             {game ? (
-                <div className="m-12 mx-10 rounded-xl p-3 text-slate-50 bg-slate-900">
+                <div className="m-12 mx-10 rounded-3xl p-3 text-slate-50 bg-slate-900">
                     
                     <div className="grid grid-cols-2 gap-0">
                         <div className="flex justify-center p-5">
@@ -53,7 +53,7 @@ export function GameInfo(){
                         <h2><b>Desenvolvedor:</b> {game.developer}</h2>
                     </div>
                     <div className="flex justify-center mt-16 mb-8">
-                        <button className="rounded-xl p-3 bg-violet-900 font-bold hover:bg-violet-700 hover:scale-105">
+                        <button className="pr-10 pl-10 rounded-xl p-3 bg-violet-900 font-bold hover:bg-violet-700 hover:scale-105">
                             <a href={game.url_game} target="_blank" rel="noopener noreferrer">Visit Game Page</a>
                         </button>
                     </div>
