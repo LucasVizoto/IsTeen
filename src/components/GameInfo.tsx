@@ -30,13 +30,13 @@ export function GameInfo(){
     return(
         <div>
             {game ? (
-                <div className="m-12 mx-10 border-4 rounded-xl p-3 text-slate-50 bg-slate-900">
+                <div className="m-12 mx-10 rounded-xl p-3 text-slate-50 bg-slate-900">
                     
                     <div className="grid grid-cols-2 gap-0">
-                        <div className="flex justify-center items-center p-5">
-                            <img className="rounded-lg size-64" src={game.url_image_game} alt={"image_from_game"} />
+                        <div className="flex justify-center p-5">
+                            <img className="rounded-lg size-64 mt-5" src={game.url_image_game} alt={"image_from_game"} />
                         </div>
-                        <div>
+                        <div className="mr-5">
                             <div className="flex items-center justify-center">
                                 <h1 className=" flex font-bold text-4xl">{game.name.toUpperCase()}</h1>
                             </div>
@@ -46,10 +46,10 @@ export function GameInfo(){
                         </div>
                     </div>
 
-                    <div className="flex justify-end">
+                    <div className="flex justify-end mr-5">
                         <h2><b>Data de Lançamento:</b> {game.release_date}</h2>
                     </div>
-                    <div className="flex justify-end">
+                    <div className="flex justify-end mr-5">
                         <h2><b>Desenvolvedor:</b> {game.developer}</h2>
                     </div>
                     <div className="flex justify-center mt-16 mb-8">
