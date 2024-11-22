@@ -8,7 +8,7 @@ export default {
     extend: {
       backgroundImage:{
         'fundo_retro': "url('/src/assets/background.png')"
-      }
+      },
     },
   },
   plugins: [],
