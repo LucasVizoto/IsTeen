@@ -5,7 +5,7 @@
         "name":"Combat",
         "description":"Combat é um jogo desenvolvido, para o Atari 2600. Foi lançado como um dos nove títulos de lançamento do sistema em setembro de 1977, e foi incluído na caixa com o sistema desde a sua introdução até 1982. O Combat foi baseado em dois jogos de arcade em preto e branco produzidos pela Atari: Tank (publicado sob o nome Kee Games) em 1974 e Anti-Aircraft II em 1975. ",
         "release_date":"2024-11-27",
-        "url_game":"http://google.com/",
+        "url_game":"https://www.construct.net/en/free-online-games/combat-71002/play",
         "url_image_game": "https://assets-prd.ignimgs.com/2022/02/07/combat-sq1-1644263038605.jpg",
         "developer":"Camilo Veríssimo Garcia Prado"
     },  
@@ -14,7 +14,7 @@
         "name":"Asteroids",
         "description":"Asteroids é um jogo de tiro espacial arcade lançado em novembro de 1979 pela Atari, e projetado por Lyle Rains e Ed Logg. O jogador controla uma nave espacial em um campo de asteróides que é periodicamente atravessada por discos voadores. O objetivo do jogo é disparar e destruir asteroides e discos enquanto não colide com nenhum dos dois, ou sendo atingido pelo contra-fogo dos discos. O jogo se torna mais difícil à medida que o número de asteroides aumenta. ",
         "release_date":"2024-11-27",
-        "url_game":"http://google.com/",
+        "url_game":"https://www.construct.net/en/free-online-games/asteroides-70892/play",
         "url_image_game": "https://assets-prd.ignimgs.com/2022/04/16/asteroids-1650127824496.jpg",
         "developer":"Ana Laura Silva Pereira"
     }
