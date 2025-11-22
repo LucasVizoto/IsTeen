@@ -7,7 +7,7 @@ import { CreateGameUseCase } from "./create-game-use-case.js"
 let gameRepository: InMemoryGameRepository
 let sut: CreateGameUseCase
 
-describe('Create Gym Use-Case', () =>{
+describe('Create Game Use-Case', () =>{
     
     beforeEach(()=>{
         gameRepository = new InMemoryGameRepository()
