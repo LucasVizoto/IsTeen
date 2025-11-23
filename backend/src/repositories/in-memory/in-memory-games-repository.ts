@@ -24,12 +24,13 @@ export class InMemoryGameRepository implements GamesRepository{
         return game
     }
     
-    delete(id: string): Promise<void> {
-        const index = this.items.findIndex((item) => item.id === id);
-        if (index > -1) {
-            this.items.splice(index, 1);
-        }
-        return Promise.resolve();
+    async delete(game: Game) {
+        const itemIndex = this.items.findIndex((item) =>
+            item.id === game.id
+        )
+
+        this.items.splice(itemIndex, 1)
+
     }
 
     async searchMany(query: string, page: number) {

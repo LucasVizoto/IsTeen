@@ -2,6 +2,7 @@ import type { GamesRepository } from "@/repositories/games-repository.js"
 import type { Game } from "generated/prisma/index.js"
 
 interface CreateGameUseCaseRequest{
+    id?: string
     game_name: string
     game_description:string
     release_date: Date
