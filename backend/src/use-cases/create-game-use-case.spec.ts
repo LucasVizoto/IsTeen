@@ -1,8 +1,7 @@
+import {faker} from '@faker-js/faker'
 import { describe, beforeEach, it, expect } from 'vitest'
 import { InMemoryGameRepository } from "@/repositories/in-memory/in-memory-games-repository.js"
 import { CreateGameUseCase } from "./create-game-use-case.js"
-
-
 
 let gameRepository: InMemoryGameRepository
 let sut: CreateGameUseCase
@@ -16,14 +15,15 @@ describe('Create Game Use-Case', () =>{
 
     it('should be able to create Game', async () =>{
 
-        const {game} = await sut.execute({
-            game_name: 'Test',
-            game_description: 'Description Test',
-            release_date: new Date(),
-            url_game: 'someurl.com',
-            url_image_game: 'someimageurl.com.br',
-            developer: 'Jhon Doe from Silva'
-        })
+    const {game} = await sut.execute({
+        game_name: 'jogo-1',
+        game_description: faker.lorem.text(),
+        release_date: new Date(),
+        url_game: faker.internet.url(),
+        url_image_game: faker.internet.url(),
+        developer: faker.person.fullName()
+    })
+
 
         expect(game.id).toEqual(expect.any(String))
         console.log(game.id)

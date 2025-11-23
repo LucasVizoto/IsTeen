@@ -1,7 +1,8 @@
 import {expect, it, describe, beforeEach} from 'vitest'
-import { hash } from 'bcryptjs'
 import { InMemoryGameRepository } from '@/repositories/in-memory/in-memory-games-repository.js'
 import { FindGameByIdUseCase } from './find-game-by-id-use-case.js'
+import { faker } from '@faker-js/faker'
+import { NotFoundError } from './errors/not-found-error.js'
 
 let gameRepository: InMemoryGameRepository
 let sut: FindGameByIdUseCase
@@ -18,28 +19,39 @@ describe('Get Game by his id Use-Case', () =>{
 
 
         const createdGame = await gameRepository.create({
-            name: 'John Doe',
-            email: 'johndoe@example.com',
-            password_hash: await hash('123456', 6),
+            game_name: 'jogo-1',
+            game_description: faker.lorem.text(),
+            release_date: new Date(),
+            url_game: faker.internet.url(),
+            url_image_game: faker.internet.url(),
+            developer: faker.person.fullName()
+        })
+        
+        const {game} = await sut.execute({
+            gameId: createdGame.id,
         })
 
-        const {user} = await sut.execute({
-            userId: createdGame.id,
-        })
-
-        expect(user.id).toEqual(expect.any(String))
-        expect(user.name).toEqual('John Doe')
+        expect(game.id).toEqual(expect.any(String))
+        expect(game.game_name).toEqual('jogo-1')
         //aqui eu digo basicamente que eu espero que o user id seja igual a qualquer string
     })
-
+    
     it('should not be able to get user profile with wrong id', async () =>{
 
-
-       await expect(() =>
+        const createdGame = await gameRepository.create({
+            game_name: 'jogo-1',
+            game_description: faker.lorem.text(),
+            release_date: new Date(),
+            url_game: faker.internet.url(),
+            url_image_game: faker.internet.url(),
+            developer: faker.person.fullName()
+        })
+        
+        await expect(() =>
             sut.execute({
-                'userId': 'non-existing-id'
+                gameId: 'non-existing-id'
             }),
-        ).rejects.toBeInstanceOf(ResourceNotFoundError)
-
+        ).rejects.toBeInstanceOf(NotFoundError)
+        
     })
 })
