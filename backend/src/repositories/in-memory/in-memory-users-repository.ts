@@ -8,7 +8,7 @@ export class InMemoryUsersRepository implements UserRepository{
     
     async findById(userId: string): Promise<User | null> {
         const user = this.items.find((item) => item.id == userId)
-
+        
         if (!user){
             return null
         }
@@ -25,6 +25,12 @@ export class InMemoryUsersRepository implements UserRepository{
         }
 
         return user
+    }
+    
+    async changeRoleToAdmin(user: User){
+        const userIndex = this.items.indexOf(user)
+        user.role = Role.ADMIN
+        this.items[userIndex] = user
     }
 
     async create(data: Prisma.UserCreateInput) {
