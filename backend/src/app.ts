@@ -1,12 +1,17 @@
 import fastify from "fastify";
 import { ZodError } from "zod";
 import { env } from "./env/index.js";
-import { logtailStream } from "./lib/logtail.js";
+import  logtailStream from "./lib/logtail.js";
 import { gameRoutes } from "./http/controllers/games/routes.js";
+import { userRoutes } from "./http/controllers/users/routes.js";
+
+const isTesting = env.NODE_ENV === 'test' || env.NODE_ENV === 'e2e';
 
 //*********INSTANCIA DA APLICAÇÃO COM CONFIGS DO SERVIDOR DE LOG*********//
 export const app = fastify({
-    logger: env.NODE_ENV === 'production' 
+    logger: isTesting
+    ? false // <<< 1. DESATIVA o logger completamente para testes
+    : env.NODE_ENV === 'production'
         ? {
             level: 'info',
             stream: logtailStream
@@ -22,6 +27,7 @@ export const app = fastify({
 
 //*********REGISTRO DE ROTAS*********//
 app.register(gameRoutes)
+app.register(userRoutes)
 
 //*********HANDLER DE ERROS*********//
 app.setErrorHandler((error, _request, reply)=>{
