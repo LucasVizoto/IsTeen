@@ -4,6 +4,7 @@ import { env } from "./env/index.js";
 import  logtailStream from "./lib/logtail.js";
 import { gameRoutes } from "./http/controllers/games/routes.js";
 import { userRoutes } from "./http/controllers/users/routes.js";
+import fastifyCookie from "@fastify/cookie";
 
 const isTesting = env.NODE_ENV === 'test' || env.NODE_ENV === 'e2e';
 
@@ -28,6 +29,7 @@ export const app = fastify({
 //*********REGISTRO DE ROTAS*********//
 app.register(gameRoutes)
 app.register(userRoutes)
+app.register(fastifyCookie)
 
 //*********HANDLER DE ERROS*********//
 app.setErrorHandler((error, _request, reply)=>{

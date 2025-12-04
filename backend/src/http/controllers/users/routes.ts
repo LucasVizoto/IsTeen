@@ -1,6 +1,18 @@
 import type { FastifyInstance } from "fastify";
 import { register } from "./register.js";
+import { authenticate } from "./authenticate.js";
+import { profile } from "./profile.js";
+import { verifyJWT } from "../../middlewares/verify-jwt.js";
+import { refresh } from "./refresh.js";
 
-export async function userRoutes(app: FastifyInstance) {
+export async function userRoutes(app: FastifyInstance){
+    /* Users */
     app.post('/users', register)
+    
+    /* Token */
+    app.post('/sessions', authenticate)
+    app.patch('/token/refresh', refresh)
+    
+    /* Autenticated */
+    app.get('/me',{onRequest: [verifyJWT]}, profile)
 }
