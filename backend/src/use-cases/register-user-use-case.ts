@@ -4,7 +4,7 @@ import { UserAlreadyExistsError } from "./errors/user-already-exists-error.js"
 import type { UserRepository } from "@/repositories/users-repository.js"
 
 interface RegisterUseCaseRequest{
-    name: string,
+    username: string,
     email: string,
     password: string,
 }
@@ -22,7 +22,7 @@ interface RegisterUseCaseResponse{
 export class RegisterUseCase{
     constructor(private userRepository:UserRepository){}
 
-    async execute({name, email, password }:RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
+    async execute({username, email, password }:RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
 
         const password_hash = await hash(password, 6) //numero de rounds, quantidade de vezes que vai ser um hash gerado
         //vai ser gerado um hsh do próprio hash 6 vezes
@@ -34,7 +34,7 @@ export class RegisterUseCase{
         }
 
         const user = await this.userRepository.create({
-            username: name,
+            username,
             email,
             password: password_hash,
         })

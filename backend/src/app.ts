@@ -1,35 +1,33 @@
 import fastify from "fastify";
 import { ZodError } from "zod";
 import { env } from "./env/index.js";
-import  logtailStream from "./lib/logtail.js";
 import { gameRoutes } from "./http/controllers/games/routes.js";
 import { userRoutes } from "./http/controllers/users/routes.js";
 import fastifyCookie from "@fastify/cookie";
+import fastifyJwt from "@fastify/jwt";
 
 const isTesting = env.NODE_ENV === 'test' || env.NODE_ENV === 'e2e';
 
 //*********INSTANCIA DA APLICAÇÃO COM CONFIGS DO SERVIDOR DE LOG*********//
-export const app = fastify({
-    logger: isTesting
-    ? false // <<< 1. DESATIVA o logger completamente para testes
-    : env.NODE_ENV === 'production'
-        ? {
-            level: 'info',
-            stream: logtailStream
-          }
-        : {
-            level: 'info',
-            transport: {
-                target: 'pino-pretty',
-                options: { colorize: true }
-            }
-        }
-})
+export const app = fastify()
 
 //*********REGISTRO DE ROTAS*********//
 app.register(gameRoutes)
 app.register(userRoutes)
+
+
+//*********REGISTRO DE PLUGINS*********//
 app.register(fastifyCookie)
+app.register(fastifyJwt, {
+    secret: env.JWT_SECRET,
+    cookie: {
+        cookieName: 'refreshToken',
+        signed: false, // estou definindo que o cookie não será assinado, nn tem o processo de hashing
+    },
+    sign:{
+        expiresIn: '10m',
+    }
+})
 
 //*********HANDLER DE ERROS*********//
 app.setErrorHandler((error, _request, reply)=>{
@@ -40,12 +38,8 @@ app.setErrorHandler((error, _request, reply)=>{
     }
     if (env.NODE_ENV !== "production"){
         
-        _request.log.error(error,'Erro em ambiente de Desenvolvimento')
         return reply.status(error.statusCode ?? 400).send({message: error.message})
 
-    } else {
-        _request.log.error(error, "Erro Interno Não Tratado");    
     }
-
     return reply.status(500).send({message: 'Internal Server Error'})
 })
