@@ -5,19 +5,20 @@ import { makeRegisterUserUseCase } from '@/use-cases/factories/make-register-use
 
 export async function register (request: FastifyRequest, reply: FastifyReply) {
     const registerBodySchema = z.object({
-        name: z.string(),
+        username: z.string(),
         email: z.string().email(),
         password: z.string().min(6),
+
     })
 
-    const {name, email, password} = registerBodySchema.parse(request.body)
+    const {username, email, password} = registerBodySchema.parse(request.body)
     
     try{
         
         const registerUseCase  = makeRegisterUserUseCase()
         
         await registerUseCase.execute({
-            name,
+            username,
             email,
             password
         })
