@@ -1,5 +1,9 @@
+import request from 'supertest'
 import { app } from "@/app.js"
-import { afterAll, beforeAll, describe, it } from "vitest"
+import { afterAll, beforeAll, describe, expect, it } from "vitest"
+import { createAndAuthenticateUser } from '@/utils/create-and-authenticate-user.js'
+import { faker } from '@faker-js/faker'
+import { NotFoundError } from '@/use-cases/errors/not-found-error.js'
 
 describe('Delete Game (e2e)', () =>{
 
@@ -12,6 +16,35 @@ describe('Delete Game (e2e)', () =>{
     })
 
     it('should be able to delete games searching by his id', async ()=>{
- 
+        
+        const {token} = await createAndAuthenticateUser(app, true)
+        
+        const createGameResponse =  await request(app.server)
+        .post('/games')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+            game_name: faker.company.name(),
+            game_description: faker.lorem.text(),
+            release_date: faker.date.past().toISOString(),
+            url_game: faker.internet.url(),
+            url_image_game: faker.internet.url(),
+            developer: faker.company.name(),
+        })
+
+        await request(app.server)
+        .delete(`/games/${createGameResponse.body.game.id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send()
+
+        console.log('testando id: ', createGameResponse.body.game.id)
+        const findAgainResponse = await request(app.server)
+        .get(`/games/${createGameResponse.body.game.id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send()
+
+        expect(findAgainResponse.statusCode).toEqual(400)
+         expect(findAgainResponse.body).toEqual(
+            expect.objectContaining({message: 'Resource Not Found'}),
+        )
     })
 })

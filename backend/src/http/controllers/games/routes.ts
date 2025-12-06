@@ -11,7 +11,7 @@ export async function gameRoutes(app: FastifyInstance){
     app.addHook('onRequest', verifyJWT)
 
     // Rotas para obter as informações dos jogos
-    app.get('/games', search)
+    app.get('/games/search', search)
     app.get('/games/:gameId', getGameById)
 
     //********ROTAS EXCLUSIVAS PARA USUÁRIOS ADMINISTRATIVOS********//
