@@ -1,0 +1,19 @@
+name: Run Unit Test
+
+# estou definindo quando vai ser executado o workflow
+on: [push]
+
+jobs:
+  run-unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3 #baixa o código na máquina virtual
+      - uses: actions/setup-node@v3 #configura o node na máquina virtual
+        with:
+          node-version: '18' #versão do node
+          cache: 'npm' #habilita o cache do npm (eu poderia colocar pnpm ou ate yarn)
+
+      - run: npm ci #melhor que o npm install para esse caso
+      - run: npm run test
