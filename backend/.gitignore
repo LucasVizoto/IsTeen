@@ -2,3 +2,7 @@
 .env
 /node_modules
 /generated
+
+# --------------- BUILD THINGS ---------------
+/build
+/coverage
