@@ -2,60 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fundo da Tela com Grade */
+/* 1. Fundo Retrowave Idêntico ao HTML */
 body {
-  background-color: #0a0a0f; /* Fundo quase preto */
+  background-color: #151525;
   background-image: 
-    linear-gradient(to top, rgba(138, 43, 226, 0.15) 1px, transparent 1px),
-    linear-gradient(to right, rgba(138, 43, 226, 0.15) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to top, rgba(138, 43, 226, 0.1) 1px, transparent 1px),
+    linear-gradient(to right, rgba(138, 43, 226, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
   min-height: 100vh;
+  color: white;
 }
 
-/* Efeito de Brilho Intenso para Títulos (Rosa/Branco) */
+/* 2. Classes de Texto Neon (Glow) */
 .neon-text-glow-pink {
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 15px #ff69b4,
-    0 0 30px #ff69b4,
-    0 0 50px #ff69b4;
+  text-shadow: 0 0 5px #FF69B4, 0 0 10px #FF69B4, 0 0 20px #FF69B4, 0 0 40px #FF1493;
+  animation: flicker 1.5s infinite alternate;
 }
 
-/* Efeito de Brilho Intenso para Subtítulos (Ciano) */
 .neon-text-glow-cyan {
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 15px #00ffff,
-    0 0 30px #00ffff;
+  text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 40px #00BFFF;
+  animation: flicker 2s infinite alternate;
 }
 
-/* Classes Utilitárias para Bordas Neon (Usadas nos componentes) */
-.neon-border-pink {
-  box-shadow: 0 0 15px #ff69b4, inset 0 0 15px rgba(255, 105, 180, 0.5);
+/* 3. Animação de Flicker (Piscar) */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.8; }
 }
 
-.neon-border-cyan {
-  box-shadow: 0 0 15px #00ffff, inset 0 0 15px rgba(0, 255, 255, 0.5);
-}
-
+/* 4. Bordas Neon via CSS (para garantir intensidade) */
 .neon-border-purple {
-  box-shadow: 0 0 25px rgba(138, 43, 226, 0.8), inset 0 0 25px rgba(138, 43, 226, 0.3);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.5), inset 0 0 15px rgba(138, 43, 226, 0.2);
+  border: 2px solid #8A2BE2;
 }
 
-/* Animações do Pacman (Mantidas) */
+:hover.neon-border-cyan {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 15px rgba(0, 255, 255, 0.2);
+  border: 2px solid #00FFFF;
+}
+
 .pacman-mouth-top {
   animation: chomp-top 0.25s infinite alternate ease-in-out;
-  transform-origin: 50px 50px;
+  transform-origin: 50px 50px; /* Define o eixo da rotação no centro do SVG */
 }
+
 .pacman-mouth-bottom {
   animation: chomp-bottom 0.25s infinite alternate ease-in-out;
   transform-origin: 50px 50px;
 }
 
+/* Definição dos movimentos (Keyframes) */
 @keyframes chomp-top {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(-35deg); }
 }
+
 @keyframes chomp-bottom {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(35deg); }
