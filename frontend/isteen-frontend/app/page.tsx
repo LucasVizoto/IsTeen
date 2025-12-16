@@ -1,6 +1,7 @@
 import PacmanCursor from '@/components/PacmanCursor';
 import NeonButton from '@/components/NeonButton';
 import ConsoleStatus from '@/components/ConsoleStatus';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -33,8 +34,13 @@ export default function Home() {
 
         {/* Botões */}
         <div className="flex flex-col space-y-6 mb-10">
-          <NeonButton>Acessar Conta</NeonButton>
-          <NeonButton>Novo Registro</NeonButton>
+          <Link href="/login" className="w-full">
+            <NeonButton>Acessar Conta</NeonButton>
+          </Link>
+
+          <Link href="/registro" className="w-full">
+            <NeonButton>Novo Registro</NeonButton>
+          </Link>
         </div>
 
         {/* Rodapé */}
