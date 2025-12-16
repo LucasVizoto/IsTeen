@@ -4,9 +4,9 @@ export default function ConsoleStatus() {
   return (
     <div className="
       w-full mb-8 p-6 rounded-xl 
-      bg-transparent /* Fundo Transparente */
+      bg-transparent 
       border-2 border-neon-cyan
-      neon-border-cyan /* Aplica o brilho intenso ciano */
+      
     ">
       <div className="text-neon-cyan  font-mono text-sm leading-loose space-y-2 font-semibold tracking-wider">
         <p>

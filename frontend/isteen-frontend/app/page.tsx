@@ -11,8 +11,7 @@ export default function Home() {
       <PacmanCursor />
 
       {/* Cartão Principal Transparente */}
-      <div className="
-        backdrop-blur-md 
+      <div className=" 
         bg-[#121726]/70
         relative z-10 w-full max-w-[550px] 
         p-10 rounded-3xl 
@@ -22,8 +21,8 @@ export default function Home() {
       ">
         
         {/* Cabeçalho */}
-        <div className="text-center mb-12 mt-2 items-center justify-center-safe">
-          <img className='size-1/2 ' src={'/logo.png'}/>
+        <div className="flex flex-col items-center justify-center text-center mb-12 mt-2">
+          <img className='size-10/12 mb-5' src={'/logo.png'}/>
           <p className="text-xl text-neon-cyan neon-text-glow-cyan font-bold tracking-[0.1em]">
             // O futuro é agora. Conecte-se.
           </p>
