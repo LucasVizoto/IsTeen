@@ -5,6 +5,7 @@ import { gameRoutes } from "./http/controllers/games/routes.js";
 import { userRoutes } from "./http/controllers/users/routes.js";
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
+import fastifyCors from "@fastify/cors";
 
 const isTesting = env.NODE_ENV === 'test' || env.NODE_ENV === 'e2e';
 
@@ -27,6 +28,11 @@ app.register(fastifyJwt, {
     sign:{
         expiresIn: '10m',
     }
+})
+
+app.register(fastifyCors, {
+    origin: true, 
+    credentials: true, 
 })
 
 //*********HANDLER DE ERROS*********//
