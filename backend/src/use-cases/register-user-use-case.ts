@@ -4,9 +4,9 @@ import { UserAlreadyExistsError } from "./errors/user-already-exists-error.js"
 import type { UserRepository } from "@/repositories/users-repository.js"
 
 interface RegisterUseCaseRequest{
-    username: string,
-    email: string,
-    password: string,
+        username: string,
+        email: string,
+        password: string,
 }
 
 interface RegisterUseCaseResponse{

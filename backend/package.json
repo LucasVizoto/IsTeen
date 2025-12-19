@@ -35,11 +35,13 @@
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.2.0",
     "@fastify/jwt": "10.0.0",
     "@logtail/node": "^0.5.6",
     "@logtail/pino": "^0.5.7",
     "@prisma/client": "6.16.1",
     "bcryptjs": "3.0.2",
+    "cors": "^2.8.5",
     "dayjs": "1.11.18",
     "dotenv": "17.2.2",
     "fastify": "5.6.0",
