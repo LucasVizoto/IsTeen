@@ -131,7 +131,7 @@ export default function GamesDashboard() {
             {/* --- BOTÃO DE CRIAR JOGO (ADMIN ONLY) --- */}
             {isAdmin && (
               <Link 
-                href="/games/create" // Rota para criação (você criará essa página depois)
+                href="/home/create-game" // Rota para criação (você criará essa página depois)
                 className="
                   flex items-center gap-2 
                   px-6 py-3 
