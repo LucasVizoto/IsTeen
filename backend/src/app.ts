@@ -6,6 +6,7 @@ import { userRoutes } from "./http/controllers/users/routes.js";
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
 import fastifyCors from "@fastify/cors";
+import fastifyMultipart from "@fastify/multipart";
 
 const isTesting = env.NODE_ENV === 'test' || env.NODE_ENV === 'e2e';
 
@@ -29,6 +30,12 @@ app.register(fastifyJwt, {
         expiresIn: '10m',
     }
 })
+app.register(fastifyMultipart, {
+  attachFieldsToBody: true, // Isso é CRUCIAL para você acessar req.body.game_name
+  limits: {
+    fileSize: 5 * 1024 * 1024, // Limite de 5MB (ajuste conforme necessário)
+  }
+});
 
 app.register(fastifyCors, {
     origin: true, 

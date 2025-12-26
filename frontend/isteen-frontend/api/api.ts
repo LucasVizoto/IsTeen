@@ -34,6 +34,7 @@ export interface LoginResponse {
 }
 
 export type CreateUserData = Omit<User, 'id'> & { password: string };
+export type CreateGameData = Omit<Game, 'id' | 'created_at' | 'updated_at'>
 export type LoginUserData = Pick<User, 'email'> & { password: string };
 
 // --- INSTÂNCIA AXIOS ---
@@ -146,6 +147,7 @@ api.interceptors.response.use(
 // --- ROTAS ---
 export const registerUser = (data: CreateUserData) => api.post<User>('/users', data);
 export const loginUser = (data: LoginUserData) => api.post<LoginResponse>('/auth', data);
+export const createGame = (data: FormData) => api.post<Game>('/games', data);
 export const listGames = (query?: string, page: number = 1) => {
   return api.get<GamesResponse>('/games/search', {
     params: { 
