@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker'
 let gamesRepository: InMemoryGameRepository
 let sut: SearchManyGamesUseCase
 
-describe('Search Gyms Use-Case', () =>{
+describe('Search Games Use-Case', () =>{
     
     beforeEach(async ()=>{
         gamesRepository = new InMemoryGameRepository()

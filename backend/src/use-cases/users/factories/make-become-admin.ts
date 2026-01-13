@@ -1,5 +1,5 @@
-import { BecomeAdminUseCase } from "../users/become-admin-user.js"
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-user-repository.js"
+import { BecomeAdminUseCase } from "../become-admin-user.js"
 
 export function makeBecomeAdminUserUseCase() {
         const usersRepository = new PrismaUserRepository()

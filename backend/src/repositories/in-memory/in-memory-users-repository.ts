@@ -32,7 +32,7 @@ export class InMemoryUsersRepository implements UserRepository{
         user.role = Role.ADMIN
         this.items[userIndex] = user
     }
-
+    
     async create(data: Prisma.UserCreateInput) {
         const user = {
             id: randomUUID(),
@@ -43,10 +43,16 @@ export class InMemoryUsersRepository implements UserRepository{
             created_at: new Date(),
             updated_at: new Date(),
         }
-
+        
         this.items.push(user)
-
+        
         return user
     }
-
+    
+    async searchMany(q: string, page: number): Promise<User[]> {
+        return this.items.filter((item) => item.username
+        .includes(q))
+        .slice((page -1) * 20, page * 20)
+    }
+    
 }
