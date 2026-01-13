@@ -1,9 +1,9 @@
 import { expect, describe, beforeEach, it} from 'vitest'
-import { DeleteGameUseCase } from './delete-game-use-case.js'
+import { DeleteGameUseCase } from '../games/delete-game-use-case.js'
 import { InMemoryGameRepository } from '@/repositories/in-memory/in-memory-games-repository.js'
-import { CreateGameUseCase } from './create-game-use-case.js'
+import { CreateGameUseCase } from '../games/create-game-use-case.js'
 import { faker } from '@faker-js/faker'
-import { NotFoundError } from './errors/not-found-error.js'
+import { NotFoundError } from '../_errors/not-found-error.js'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository.js'
 import { BecomeAdminUseCase } from './become-admin-user.js'
 

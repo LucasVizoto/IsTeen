@@ -1,4 +1,4 @@
-import { GetProfileUseCase } from "../get-user-profile.js"
+import { GetProfileUseCase } from "../users/get-user-profile.js"
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-user-repository.js"
 
 export function makeGetProfileUserUseCase() {

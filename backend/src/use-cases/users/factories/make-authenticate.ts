@@ -1,4 +1,4 @@
-import { AuthenticateUseCase } from "../authenticate-user-use-case.js"
+import { AuthenticateUseCase } from "../users/authenticate-user-use-case.js"
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-user-repository.js"
 
 export function makeAuthenticateUserUseCase() {

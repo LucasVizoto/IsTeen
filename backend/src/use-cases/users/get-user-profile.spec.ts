@@ -2,7 +2,7 @@ import {expect, it, describe, beforeEach} from 'vitest'
 import {InMemoryUsersRepository} from 'src/repositories/in-memory/in-memory-users-repository.js'
 import { hash } from 'bcryptjs'
 import { GetProfileUseCase } from './get-user-profile.js'
-import { NotFoundError } from './errors/not-found-error.js'
+import { NotFoundError } from '../_errors/not-found-error.js'
 
 let userRepository: InMemoryUsersRepository
 let sut: GetProfileUseCase

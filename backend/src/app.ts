@@ -16,6 +16,9 @@ export const app = fastify()
 //*********REGISTRO DE ROTAS*********//
 app.register(gameRoutes)
 app.register(userRoutes)
+app.addHook('onResponse', (res) =>{
+    console.log(res.body)
+})
 
 
 //*********REGISTRO DE PLUGINS*********//

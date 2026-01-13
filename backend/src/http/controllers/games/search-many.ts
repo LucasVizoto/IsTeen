@@ -1,4 +1,4 @@
-import { makeSearchManyGamesUseCase } from '@/use-cases/factories/make-search-many-games-use-case.js'
+import { makeSearchManyGamesUseCase } from '@/use-cases/games/factories/make-search-many-games-use-case.js'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import {z} from 'zod'
 

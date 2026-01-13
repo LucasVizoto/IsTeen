@@ -2,7 +2,7 @@ import {expect, it, describe, beforeEach} from 'vitest'
 import { InMemoryGameRepository } from '@/repositories/in-memory/in-memory-games-repository.js'
 import { FindGameByIdUseCase } from './find-game-by-id-use-case.js'
 import { faker } from '@faker-js/faker'
-import { NotFoundError } from './errors/not-found-error.js'
+import { NotFoundError } from '../_errors/not-found-error.js'
 
 let gameRepository: InMemoryGameRepository
 let sut: FindGameByIdUseCase
