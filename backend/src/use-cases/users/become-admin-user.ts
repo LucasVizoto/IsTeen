@@ -1,15 +1,11 @@
 import type { UserRepository } from "@/repositories/users-repository.js";
-import { compare } from "bcryptjs";
-import type { User } from "generated/prisma/index.js";
-import { InvalidCredentialsError } from "./errors/invalid-credentials-error.js";
-import { NotFoundError } from "./errors/not-found-error.js";
+import { NotFoundError } from "../_errors/not-found-error.js";
 
 interface BecomeAdminUseCaseRequest{
-    email: string
+    userId: string
 }
 
 interface BecomeAdminUseCaseResponse {
-    user: User
 }
 
 export class BecomeAdminUseCase{
@@ -17,10 +13,10 @@ export class BecomeAdminUseCase{
         private userRepository: UserRepository,
     ) {}
 
-    async execute({email}: BecomeAdminUseCaseRequest): Promise<BecomeAdminUseCaseResponse>{
+    async execute({userId}: BecomeAdminUseCaseRequest): Promise<BecomeAdminUseCaseResponse>{
         //buscar o usuário no banco pelo e-mail
         //compaarar se a senha salva no banco bate com a senha do param
-        const user = await this.userRepository.findByEmail(email)
+        const user = await this.userRepository.findById(userId)
         
         if (!user){
             throw new NotFoundError()
@@ -28,8 +24,6 @@ export class BecomeAdminUseCase{
         
         await this.userRepository.changeRoleToAdmin(user)
 
-        return{
-            user,
-        }
+        return{}
     }
 }

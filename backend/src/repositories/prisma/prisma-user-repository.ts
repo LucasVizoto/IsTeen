@@ -32,12 +32,26 @@ export class PrismaUserRepository implements UserRepository{
             }
         })
     }
-
+    
     async create(data: Prisma.UserCreateInput){
         const user = await prisma.user.create({
             data,
-    })
+        })
+        
+        return user
+    }
 
-    return user
+    async searchMany(q: string, page: number): Promise<User[]> {
+        const users = await prisma.user.findMany({
+            where: {
+                username: {
+                    contains: q,
+                },
+            },
+            take: 20,
+            skip: (page -1) * 20,
+        })
+
+        return users
     }
 }

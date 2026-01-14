@@ -1,5 +1,5 @@
 import type { Game } from "generated/prisma/index.js";
-import { NotFoundError } from "./errors/not-found-error.js";
+import { NotFoundError } from "../_errors/not-found-error.js";
 import type { GamesRepository } from "@/repositories/games-repository.js";
 
 interface FindGameByIdUseCaseRequest{

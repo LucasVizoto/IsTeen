@@ -1,31 +1,36 @@
-import cloudinary from '@/lib/cloudnary.js'; // Importe sua config
-import { Readable } from 'stream';
+import { env } from '@/env/index.js';
+import { v2 as cloudinary } from 'cloudinary';
 
-export async function uploadToStorage(buffer: Buffer, filename: string): Promise<string> {
+cloudinary.config({
+  cloud_name: env.CLOUDINARY_CLOUD_NAME,
+  api_key: env.CLOUDINARY_API_KEY,
+  api_secret: env.CLOUDINARY_API_SECRET,
+});
+
+export async function uploadToStorage(fileBuffer: Buffer, fileName: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    // Cria uma stream de upload para o Cloudinary
+    // Cria um stream de upload para o Cloudinary
     const uploadStream = cloudinary.uploader.upload_stream(
       {
-        folder: 'games', // Organize em pastas se desejar
-        public_id: filename.split('.')[0] || filename, // Opcional: define o nome do arquivo no Cloudinary
-        resource_type: 'auto', // Detecta se é imagem, video, etc.
+        folder: 'games-covers', // Pasta onde ficarão as imagens no Cloudinary
+        resource_type: 'image',
+        public_id: fileName.split('.')[0], // Usa o nome do arquivo (sem extensão) como ID opcional
       },
       (error, result) => {
         if (error) {
-          console.error('Cloudinary Upload Error:', error);
+          console.error('Erro no Cloudinary:', error);
           return reject(error);
         }
-        // Retorna a URL segura da imagem
-        resolve(result?.secure_url || '');
+        // Retorna a URL segura (https)
+        if (result && result.secure_url) {
+          resolve(result.secure_url);
+        } else {
+          reject(new Error("Upload concluído mas URL não retornada"));
+        }
       }
     );
 
-    // Converte o Buffer em uma Stream legível e envia para o Cloudinary
-    const readableStream = new Readable();
-    readableStream.push(buffer);
-    readableStream.push(null); // Sinaliza o fim da stream
-    
-    // Pipe (conecta) a stream de leitura na stream de upload
-    readableStream.pipe(uploadStream);
+    // Escreve o buffer no stream e finaliza
+    uploadStream.end(fileBuffer);
   });
 }

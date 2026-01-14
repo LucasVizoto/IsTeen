@@ -3,7 +3,7 @@ import { app } from "@/app.js"
 import { afterAll, beforeAll, describe, expect, it } from "vitest"
 import { createAndAuthenticateUser } from '@/utils/create-and-authenticate-user.js'
 import { faker } from '@faker-js/faker'
-import { NotFoundError } from '@/use-cases/errors/not-found-error.js'
+import { NotFoundError } from '@/use-cases/_errors/not-found-error.js'
 
 describe('Delete Game (e2e)', () =>{
 
@@ -36,7 +36,6 @@ describe('Delete Game (e2e)', () =>{
         .set('Authorization', `Bearer ${token}`)
         .send()
 
-        console.log('testando id: ', createGameResponse.body.game.id)
         const findAgainResponse = await request(app.server)
         .get(`/games/${createGameResponse.body.game.id}`)
         .set('Authorization', `Bearer ${token}`)

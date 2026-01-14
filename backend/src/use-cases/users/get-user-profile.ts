@@ -1,6 +1,6 @@
 import type { UserRepository } from "@/repositories/users-repository.js";
 import type { User } from "generated/prisma/index.js";
-import { NotFoundError } from "./errors/not-found-error.js";
+import { NotFoundError } from "../_errors/not-found-error.js";
 
 interface GetProfileUseCaseRequest{
     userId: string

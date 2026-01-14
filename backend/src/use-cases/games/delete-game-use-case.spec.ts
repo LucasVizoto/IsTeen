@@ -3,7 +3,7 @@ import { DeleteGameUseCase } from './delete-game-use-case.js'
 import { InMemoryGameRepository } from '@/repositories/in-memory/in-memory-games-repository.js'
 import { CreateGameUseCase } from './create-game-use-case.js'
 import { faker } from '@faker-js/faker'
-import { NotFoundError } from './errors/not-found-error.js'
+import { NotFoundError } from '../_errors/not-found-error.js'
 
 let inMemoryGamesRepository: InMemoryGameRepository
 let sut: DeleteGameUseCase

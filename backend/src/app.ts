@@ -17,7 +17,6 @@ export const app = fastify()
 app.register(gameRoutes)
 app.register(userRoutes)
 
-
 //*********REGISTRO DE PLUGINS*********//
 app.register(fastifyCookie)
 app.register(fastifyJwt, {

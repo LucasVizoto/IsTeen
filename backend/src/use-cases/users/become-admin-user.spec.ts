@@ -1,9 +1,6 @@
 import { expect, describe, beforeEach, it} from 'vitest'
-import { DeleteGameUseCase } from './delete-game-use-case.js'
-import { InMemoryGameRepository } from '@/repositories/in-memory/in-memory-games-repository.js'
-import { CreateGameUseCase } from './create-game-use-case.js'
 import { faker } from '@faker-js/faker'
-import { NotFoundError } from './errors/not-found-error.js'
+import { NotFoundError } from '../_errors/not-found-error.js'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository.js'
 import { BecomeAdminUseCase } from './become-admin-user.js'
 
@@ -25,7 +22,7 @@ describe('Become Admin User',() =>{
     })   
 
     await sut.execute({
-        email: createdUser.email
+        userId: createdUser.id
     })
 
     expect(inMemoryUsersRepository.items[0]).toEqual(
@@ -46,7 +43,7 @@ describe('Become Admin User',() =>{
 
     expect( async () =>{
         await sut.execute({
-            email: "email.teste@testando.com.br"
+            userId: "email.teste@testando.com.br"
         })
     }).rejects.toBeInstanceOf(NotFoundError)
     expect(inMemoryUsersRepository.items).toHaveLength(1)

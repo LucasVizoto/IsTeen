@@ -26,7 +26,6 @@ describe('Create Game Use-Case', () =>{
 
 
         expect(game.id).toEqual(expect.any(String))
-        console.log(game.id)
         //aqui eu digo basicamente que eu espero que o user id seja igual a qualquer string
     })
 })
