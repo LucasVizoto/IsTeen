@@ -5,6 +5,7 @@ import { profile } from "./profile.js";
 import { verifyJWT } from "../../middlewares/verify-jwt.js";
 import { refresh } from "./refresh.js";
 import { searchUsers } from "./search-many.js";
+import { becomeUserAnAdmin } from "./make-admin.js";
 
 export async function userRoutes(app: FastifyInstance){
     /* Users */
@@ -17,4 +18,5 @@ export async function userRoutes(app: FastifyInstance){
     /* Autenticated */
     app.get('/me',{onRequest: [verifyJWT]}, profile)
     app.get('/users/search', {onRequest: [verifyJWT]}, searchUsers)
+    app.patch('/users/:userId/promote-admin', {onRequest: [verifyJWT]}, becomeUserAnAdmin)
 }

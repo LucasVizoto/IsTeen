@@ -19,6 +19,6 @@ export async function searchUsers (request: FastifyRequest, reply: FastifyReply)
     })
 
     return reply.status(200).send({
-        users,
+        users
     })
 }
