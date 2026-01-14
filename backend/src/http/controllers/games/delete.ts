@@ -1,5 +1,4 @@
 import { makeDeleteGameUseCase } from '@/use-cases/games/factories/make-delete-game-use-case.js'
-import { makeFindGameByIdUseCase } from '@/use-cases/games/factories/make-find-game-by-id-use-case.js'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import z from 'zod'
 

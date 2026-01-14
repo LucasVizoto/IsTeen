@@ -4,6 +4,7 @@ import { authenticate } from "./authenticate.js";
 import { profile } from "./profile.js";
 import { verifyJWT } from "../../middlewares/verify-jwt.js";
 import { refresh } from "./refresh.js";
+import { searchUsers } from "./search-many.js";
 
 export async function userRoutes(app: FastifyInstance){
     /* Users */
@@ -15,4 +16,5 @@ export async function userRoutes(app: FastifyInstance){
     
     /* Autenticated */
     app.get('/me',{onRequest: [verifyJWT]}, profile)
+    app.get('/users/search', {onRequest: [verifyJWT]}, searchUsers)
 }
