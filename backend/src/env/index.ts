@@ -8,7 +8,12 @@ const envSchema = z.object({
     LOGTAIL_SOURCE_TOKEN: z.string(),
     CLOUDINARY_CLOUD_NAME: z.string(),
     CLOUDINARY_API_KEY: z.string(),
-    CLOUDINARY_API_SECRET: z.string()
+    CLOUDINARY_API_SECRET: z.string(),
+    SMTP_HOST: z.string(),
+    SMTP_PORT: z.string().default("587"),
+    SMTP_USER: z.string(),
+    SMTP_PASS: z.string(),
+    MAIL_FROM: z.string().email()
 })
 
 const _env = envSchema.safeParse(process.env)
