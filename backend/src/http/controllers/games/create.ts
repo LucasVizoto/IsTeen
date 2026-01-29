@@ -1,5 +1,4 @@
 import { makeCreateGameUseCase } from "@/use-cases/games/factories/make-create-game-use-case.js";
-import { uploadToStorage } from "@/utils/upload-to-storage.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 

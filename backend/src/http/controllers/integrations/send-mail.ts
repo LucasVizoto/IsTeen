@@ -2,24 +2,30 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 import {z} from 'zod'
 import { MailService } from '@/services/send-email-service.js'
 import { SendMailFailedError } from '@/services/_errors/send-mail-failed-error.js'
+import path from 'node:path'
+import fs from 'node:fs/promises';
 
-export async function sendEmail (request: FastifyRequest, reply: FastifyReply) {
+
+export async function sendEmailToAdminPromotion (request: FastifyRequest, reply: FastifyReply) {
     const registerBodySchema = z.object({
-        recipient: z.string(),
-        subject: z.string(),
-        text: z.string(),
+        to: z.string(),
     })
 
-    const {recipient, subject, text, } = registerBodySchema.parse(request.body)
+    const {to} = registerBodySchema.parse(request.body)
     
     try{
         
         const sendMailService  = new MailService()
         
+        const templatePath = path.resolve(process.cwd(), 'src', 'static', 'isteen-admin-promotion.html');
+    
+        const htmlTemplate = await fs.readFile(templatePath, 'utf-8');
+
         await sendMailService.sendMail({
-            to: recipient,
-            subject,
-            text,
+            to,
+            subject: "🚀 Promoção: Bem-vindo à Administração ISTEEN",
+            text: "Parabéns! Você foi promovido a Administrador da comunidade ISTEEN.",
+            html: htmlTemplate
         })
     } catch (err){
         if(err instanceof SendMailFailedError){
