@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { parseCookies } from 'nookies';
 
 // Adicionei o ícone Plus para o botão de criar
-import { Search, Calendar, Code2, Gamepad2, Loader2, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { Search, Calendar, Code2, Gamepad2, Loader2, ChevronLeft, ChevronRight, Plus, UserSearch } from 'lucide-react';
 import Link from 'next/link';
 
 // Interface para o Payload do seu Token (ajuste conforme seu backend)
@@ -98,7 +98,7 @@ export default function GamesDashboard() {
               Biblioteca
             </h1>
             <p className="text-neon-cyan mt-2 font-mono text-sm">
-              // Escolha sua próxima aventura
+              / / Escolha sua próxima aventura
             </p>
           </div>
 
@@ -144,6 +144,23 @@ export default function GamesDashboard() {
               >
                 <Plus size={20} />
                 Novo Jogo
+              </Link>
+            )}
+            {isAdmin && (
+              <Link 
+                href="/home/users-hub" // Rota para criação (você criará essa página depois)
+                className="
+                  flex items-center gap-2 
+                  px-6 py-3 
+                  bg-neon-pink/20 border border-neon-pink text-neon-pink 
+                  rounded-full font-bold uppercase tracking-wider text-sm
+                  hover:bg-neon-pink hover:text-white hover:shadow-[0_0_20px_rgba(255,105,180,0.6)]
+                  transition-all duration-300
+                  whitespace-nowrap
+                "
+              >
+                <UserSearch size={20} />
+                Listagem de Usuários
               </Link>
             )}
 
