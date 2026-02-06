@@ -12,6 +12,13 @@ export interface User {
   email: string;
 }
 
+export interface FetchManyUsers{
+  id: string;
+  username: string;
+  email: string;
+  created_at: string;
+}
+
 export interface Game {
   id: string;
   game_name: string;
@@ -26,6 +33,10 @@ export interface Game {
 
 export interface GamesResponse {
   games: Game[];
+}
+export interface UsersResponse {
+  users: FetchManyUsers[];
+  // total?: number; 
 }
 
 export interface LoginResponse {
@@ -148,6 +159,7 @@ api.interceptors.response.use(
 export const registerUser = (data: CreateUserData) => api.post<User>('/users', data);
 export const loginUser = (data: LoginUserData) => api.post<LoginResponse>('/auth', data);
 export const createGame = (data: FormData) => api.post<Game>('/games', data);
+export const updateUserRole = (userId: string) => api.patch(`/user/${userId}/promote-admin`)
 export const listGames = (query?: string, page: number = 1) => {
   return api.get<GamesResponse>('/games/search', {
     params: { 
@@ -155,4 +167,16 @@ export const listGames = (query?: string, page: number = 1) => {
       page: page 
     }
   })
+}
+export const listUsers = (query?: string, page: number = 1) => {
+  return api.get<UsersResponse>('/users/search', {
+    params: {
+      q: query,    // Filtro de busca
+      page: page,  // Paginação
+    }
+  })
+}
+
+export const sendMail = (data: {to: string}) => {
+  return api.post('/send-email', data);
 }

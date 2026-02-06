@@ -24,16 +24,16 @@ app.register(fastifyJwt, {
     secret: env.JWT_SECRET,
     cookie: {
         cookieName: 'refreshToken',
-        signed: false, // estou definindo que o cookie não será assinado, nn tem o processo de hashing
+        signed: false, 
     },
     sign:{
         expiresIn: '10m',
     }
 })
 app.register(fastifyMultipart, {
-  attachFieldsToBody: true, // Isso é CRUCIAL para você acessar req.body.game_name
+  attachFieldsToBody: true, 
   limits: {
-    fileSize: 5 * 1024 * 1024, // Limite de 5MB (ajuste conforme necessário)
+    fileSize: 5 * 1024 * 1024, // Limite de 5MB 
   }
 });
 
