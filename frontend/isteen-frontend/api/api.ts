@@ -159,7 +159,8 @@ api.interceptors.response.use(
 export const registerUser = (data: CreateUserData) => api.post<User>('/users', data);
 export const loginUser = (data: LoginUserData) => api.post<LoginResponse>('/auth', data);
 export const createGame = (data: FormData) => api.post<Game>('/games', data);
-export const updateUserRole = (userId: string) => api.patch(`/user/${userId}/promote-admin`)
+export const uploadFile = (file: FormData) => api.post('/upload', file)
+export const updateUserRole = (userId: string) => api.patch(`/users/${userId}/promote-admin`)
 export const listGames = (query?: string, page: number = 1) => {
   return api.get<GamesResponse>('/games/search', {
     params: { 

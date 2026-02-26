@@ -12,6 +12,7 @@ import {
   Loader2, ShieldAlert, Home, Mail, Calendar, Hash,
   Shield, ShieldCheck, X, Check
 } from 'lucide-react';
+import { Slide, toast, ToastContainer } from 'react-toastify';
 
 interface TokenPayload {
   role: string;
@@ -85,7 +86,30 @@ export default function UsersPage() {
       setUserToPromote(null); // Fecha o modal
     } catch (error) {
       console.log("Erro ao promover usuário", error);
-      alert("Erro ao promover usuário. Tente novamente.");
+      toast.error('Erro ao promover usuário', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+        });
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Slide}
+        />
     } finally {
       setIsPromoting(false);
     }
@@ -211,7 +235,7 @@ export default function UsersPage() {
                             onClick={() => setUserToPromote(user)}
                             className="group/btn flex items-center justify-center mx-auto p-2 rounded-lg hover:bg-neon-pink/10 transition-all text-white/30 hover:text-neon-pink"
                             title="Tornar Admin"
-                          >
+>
                             <Shield size={20} className="group-hover/btn:scale-110 transition-transform" />
                           </button>
                         )}

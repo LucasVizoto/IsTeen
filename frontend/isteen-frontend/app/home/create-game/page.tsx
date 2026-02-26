@@ -77,12 +77,6 @@ export default function CreateGamePage() {
 
       // Adiciona os campos de texto
       dataToSend.append('game_name', formData.game_name);
-      dataToSend.append('developer', formData.developer);
-      dataToSend.append('url_game', formData.url_game);
-      dataToSend.append('game_description', formData.game_description);
-      
-      // Data ISO
-      dataToSend.append('release_date', new Date(formData.release_date).toISOString());
 
       // Lógica da Imagem: Prioriza Arquivo, senão usa URL
       if (selectedFile) {
