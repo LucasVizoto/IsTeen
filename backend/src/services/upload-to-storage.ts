@@ -1,6 +1,3 @@
-import type { ISendMailOptions } from "@/interfaces/mail-interface.js";
-import { transporter } from "@/lib/mail.js";
-import { SendMailFailedError } from "./_errors/send-mail-failed-error.js";
 import { env } from "@/env/index.js";
 import { supabase } from "@/lib/supabase.js";
 import { randomUUID } from "node:crypto";
@@ -8,7 +5,7 @@ import { UploadToBucketFailedError } from "./_errors/upload-to-bucket-failed-err
 
 interface UploadToStorageRequest{
     fileName: string,
-    buffer: Buffer
+    file: Buffer
 }
 
 interface UploadToStorageResponse{
@@ -19,13 +16,17 @@ export class UploadToStorageService {
   /**
    * Envia um anexo para o armazenamento do Supabase
    */
-  async upload({fileName, buffer}: UploadToStorageRequest): Promise<UploadToStorageResponse> {
+  async upload({fileName, file}: UploadToStorageRequest): Promise<UploadToStorageResponse> {
     try {
         const imageId = randomUUID()
         const filePath = `images/${imageId+fileName}`; 
-        await supabase.storage
-        .from(env.SUPABASE_BUCKET_NAME)
-        .upload(filePath, buffer);
+          const { data, error } = await supabase
+          .storage
+          .from(env.SUPABASE_BUCKET_NAME)
+          .upload(
+            `${fileName}-${randomUUID()}`,
+            file,
+          )
 
         const publicUrlReturnData = supabase
         .storage

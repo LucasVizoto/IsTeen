@@ -38,6 +38,7 @@ app.register(fastifyMultipart, {
 });
 
 app.register(fastifyCors, {
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS', 'PATCH'],
     origin: true, 
     credentials: true, 
 })

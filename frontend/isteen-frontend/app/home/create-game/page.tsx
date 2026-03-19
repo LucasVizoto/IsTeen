@@ -2,13 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-// Note que removemos CreateGameData da importação pois usaremos FormData nativo
-import { createGame, COOKIE_NAME } from '@/api/api'; 
+import { createGame, uploadFile, COOKIE_NAME } from '@/api/api';
 import { parseCookies } from 'nookies';
 import { jwtDecode } from "jwt-decode";
 import Link from 'next/link';
 
-// Adicionei o ícone 'Upload'
 import { 
   Gamepad2, Calendar, Link as LinkIcon, Image as ImageIcon, 
   Code2, AlignLeft, Save, X, Loader2, ShieldAlert, Upload 
@@ -23,25 +21,22 @@ interface TokenPayload {
 export default function CreateGamePage() {
   const router = useRouter();
   
-  // Estados do Formulário
   const [formData, setFormData] = useState({
     game_name: '',
     developer: '',
     release_date: '',
     url_game: '',
-    url_image_game: '', // Mantemos caso ele queira usar URL
+    url_image_game: '',
     game_description: ''
   });
 
-  // Novo estado para o arquivo
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
-  // 1. Proteção de Rota
+  // Proteção de Rota
   useEffect(() => {
     const { [COOKIE_NAME]: token } = parseCookies();
     if (!token) { router.push('/login'); return; }
@@ -57,42 +52,43 @@ export default function CreateGamePage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Handler específico para o arquivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
-      // Opcional: Limpar o campo de URL se o usuário selecionar um arquivo para evitar confusão visual
+      // Limpa o campo de URL manual quando um arquivo é selecionado
       setFormData(prev => ({ ...prev, url_image_game: '' }));
     }
   };
 
-  // Submit atualizado para FormData
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
     try {
-      const dataToSend = new FormData();
+      // A URL final da imagem (pode vir do upload ou ser digitada manualmente)
+      let imageUrl = formData.url_image_game;
 
-      // Adiciona os campos de texto
-      dataToSend.append('game_name', formData.game_name);
-      dataToSend.append('developer', formData.developer);
-      dataToSend.append('url_game', formData.url_game);
-      dataToSend.append('game_description', formData.game_description);
-      
-      // Data ISO
-      dataToSend.append('release_date', new Date(formData.release_date).toISOString());
-
-      // Lógica da Imagem: Prioriza Arquivo, senão usa URL
+      // ── Etapa 1: Upload da imagem (somente se o usuário selecionou um arquivo) ──
       if (selectedFile) {
-        // 'image_file' deve ser o nome do campo que o Multer/Backend espera
-        dataToSend.append('image_file', selectedFile); 
-      } else if (formData.url_image_game) {
-        dataToSend.append('url_image_game', formData.url_image_game);
+        const uploadFormData = new FormData();
+        // O backend espera o arquivo no campo chamado 'file'
+        uploadFormData.append('file', selectedFile);
+
+        const uploadResponse = await uploadFile(uploadFormData);
+        imageUrl = uploadResponse.data.url;
       }
 
-      await createGame(dataToSend);
+      // ── Etapa 2: Criar o jogo com a URL pública da imagem ──
+      const gameFormData = new FormData();
+      gameFormData.append('game_name', formData.game_name);
+      gameFormData.append('developer', formData.developer);
+      gameFormData.append('release_date', formData.release_date);
+      gameFormData.append('url_game', formData.url_game);
+      gameFormData.append('url_image_game', imageUrl);
+      gameFormData.append('game_description', formData.game_description);
+
+      await createGame(gameFormData);
       
       setShowSuccessModal(true);
       setTimeout(() => { router.push('/home'); }, 2000);
@@ -197,11 +193,10 @@ export default function CreateGamePage() {
               <div className="group">
                 <label className="block text-xs font-bold text-neon-cyan uppercase tracking-widest mb-2 ml-1">Imagem de Capa</label>
                 
-                {/* 1. Input de URL */}
+                {/* Input de URL manual */}
                 <div className="relative mb-3">
                   <input 
                     type="url" name="url_image_game" 
-                    // Desabilita URL se tiver arquivo selecionado para não confundir
                     disabled={!!selectedFile}
                     value={formData.url_image_game} onChange={handleChange}
                     placeholder="Ex: https://..."
@@ -210,14 +205,14 @@ export default function CreateGamePage() {
                   <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" size={18} />
                 </div>
 
-                {/* Divisor "OU" Estilizado */}
+                {/* Divisor "OU" */}
                 <div className="flex items-center gap-2 mb-3 px-1">
                   <div className="h-px bg-white/10 flex-1"></div>
                   <span className="text-[10px] text-white/40 uppercase font-bold">OU envie um arquivo</span>
                   <div className="h-px bg-white/10 flex-1"></div>
                 </div>
 
-                {/* 2. Input de Arquivo Customizado */}
+                {/* Input de Arquivo */}
                 <div className="relative">
                   <input 
                     type="file" 
