@@ -6,18 +6,12 @@ import { userRoutes } from "./http/controllers/users/routes.js";
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
 import fastifyCors from "@fastify/cors";
-import fastifyMultipart from "@fastify/multipart";
+import { fastifyMultipart } from "@fastify/multipart";
 import { integrationRoutes } from "./http/controllers/integrations/routes.js";
-
-const isTesting = env.NODE_ENV === 'test' || env.NODE_ENV === 'e2e';
 
 //*********INSTANCIA DA APLICAÇÃO COM CONFIGS DO SERVIDOR DE LOG*********//
 export const app = fastify()
 
-//*********REGISTRO DE ROTAS*********//
-app.register(gameRoutes)
-app.register(userRoutes)
-app.register(integrationRoutes)
 //*********REGISTRO DE PLUGINS*********//
 app.register(fastifyCookie)
 app.register(fastifyJwt, {
@@ -57,3 +51,8 @@ app.setErrorHandler((error, _request, reply)=>{
     }
     return reply.status(500).send({message: 'Internal Server Error'})
 })
+
+//*********REGISTRO DE ROTAS*********//
+app.register(gameRoutes)
+app.register(userRoutes)
+app.register(integrationRoutes)

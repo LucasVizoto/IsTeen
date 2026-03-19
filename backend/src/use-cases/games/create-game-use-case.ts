@@ -1,25 +1,31 @@
 import type { GamesRepository } from "@/repositories/games-repository.js"
 import type { Game } from "generated/prisma/index.js"
 
-interface CreateGameUseCaseRequest{
+interface CreateGameUseCaseRequest {
     game_name: string
-    game_description:string
+    game_description: string
     release_date: Date
     url_game: string
+    /** URL pública da imagem. Pode ser vazia se nenhuma imagem foi fornecida. */
     url_image_game: string
     developer: string
 }
 
-interface CreateGameUseCaseResponse{
+interface CreateGameUseCaseResponse {
     game: Game
 }
 
+export class CreateGameUseCase {
+    constructor(private gamesRepository: GamesRepository) {}
 
-export class CreateGameUseCase{
-    constructor(private gamesRepository: GamesRepository){}
-
-    async execute({game_name, game_description, release_date,url_game,url_image_game, developer}:CreateGameUseCaseRequest): Promise<CreateGameUseCaseResponse> {
-
+    async execute({
+        game_name,
+        game_description,
+        release_date,
+        url_game,
+        url_image_game,
+        developer,
+    }: CreateGameUseCaseRequest): Promise<CreateGameUseCaseResponse> {
 
         const game = await this.gamesRepository.create({
             game_name,
@@ -27,13 +33,9 @@ export class CreateGameUseCase{
             release_date,
             url_game,
             url_image_game,
-            developer
+            developer,
         })
 
-        return {
-            game,
-        }
+        return { game }
     }
 }
-
-
