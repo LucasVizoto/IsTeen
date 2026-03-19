@@ -3,45 +3,45 @@ import { supabase } from "@/lib/supabase.js";
 import { randomUUID } from "node:crypto";
 import { UploadToBucketFailedError } from "./_errors/upload-to-bucket-failed-error.js";
 
-interface UploadToStorageRequest{
-    fileName: string,
-    file: Buffer
+interface UploadToStorageRequest {
+    fileName: string;
+    file: Buffer;
+    mimeType: string;
 }
 
-interface UploadToStorageResponse{
-    publicUrl: string
+interface UploadToStorageResponse {
+    publicUrl: string;
 }
 
 export class UploadToStorageService {
-  /**
-   * Envia um anexo para o armazenamento do Supabase
-   */
-  async upload({fileName, file}: UploadToStorageRequest): Promise<UploadToStorageResponse> {
-    try {
-        const imageId = randomUUID()
-        const filePath = `images/${imageId+fileName}`; 
-          const { data, error } = await supabase
-          .storage
-          .from(env.SUPABASE_BUCKET_NAME)
-          .upload(
-            `${fileName}-${randomUUID()}`,
-            file,
-          )
+    /**
+     * Envia um arquivo para o armazenamento do Supabase
+     */
+    async upload({ fileName, file, mimeType }: UploadToStorageRequest): Promise<UploadToStorageResponse> {
+        // Gera um caminho único e consistente para o upload e para a URL pública
+        const extension = fileName.split('.').pop() ?? 'bin'
+        const filePath = `images/${randomUUID()}.${extension}`
 
-        const publicUrlReturnData = supabase
-        .storage
-        .from(env.SUPABASE_BUCKET_NAME)
-        .getPublicUrl(filePath);
+        const { error } = await supabase
+            .storage
+            .from(env.SUPABASE_BUCKET_NAME)
+            .upload(filePath, file, {
+                contentType: mimeType,
+                upsert: false,
+            })
 
-        const publicUrl = publicUrlReturnData.data.publicUrl;
-
-        return {
-            publicUrl
+        if (error) {
+            console.error('❌ Erro ao enviar o arquivo ao Bucket:', error.message)
+            throw new UploadToBucketFailedError()
         }
 
-    } catch (error) {
-      console.error('❌ Erro ao enviar o anexo ao Bucket:', error);
-      throw new UploadToBucketFailedError();
+        const { data: publicUrlData } = supabase
+            .storage
+            .from(env.SUPABASE_BUCKET_NAME)
+            .getPublicUrl(filePath)
+
+        return {
+            publicUrl: publicUrlData.publicUrl,
+        }
     }
-  }
 }
