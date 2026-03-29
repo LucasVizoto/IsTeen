@@ -18,14 +18,20 @@ jobs:
               POSTGRESQL_DATABASE: isteen_postgres_db
 
     steps:
-      - uses: actions/checkout@v3 #baixa o código na máquina virtual
-      - uses: actions/setup-node@v3 #configura o node na máquina virtual
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '18' #versão do node
-          cache: 'npm' #habilita o cache do npm (eu poderia colocar pnpm ou ate yarn)
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json  
 
-      - run: npm ci #melhor que o npm install para esse caso
-      - run: npm run test:e2e
+      - name: Install dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Run E2E tests
+        working-directory: backend
+        run: npm run test:e2e
         env:
             JWT_SECRET: testing
             DATABASE_URL: "postgresql://isteen:isteen@localhost:5436/isteen_postgres_db"
